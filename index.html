@@ -1196,11 +1196,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
     <div class="dev rv">
       <svg class="ast" viewBox="0 0 100 100" aria-hidden="true"><use href="#ch-ast"/></svg>
       <div class="scr" id="yt" data-id="1iff2SP7Rlk">
-        <button class="poster" type="button" aria-label="Смотреть видео: Akkusativ Präpositionen">
+        <a class="poster" href="https://www.youtube.com/watch?v=1iff2SP7Rlk" target="_blank" rel="noopener" aria-label="Смотреть видео: Akkusativ Präpositionen">
           <img src="https://i.ytimg.com/vi/1iff2SP7Rlk/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
           <span class="pl"><svg class="ic"><use href="#i-play"/></svg></span>
           <span class="vt">Урок 34. Akkusativ Präpositionen: für, gegen, ohne, bis, durch, um</span>
-        </button>
+        </a>
       </div>
       <div class="btns"><i></i><i></i><i></i></div>
       <svg class="hrt" viewBox="0 0 100 100" aria-hidden="true"><use href="#ch-heart"/></svg>
@@ -1725,7 +1725,10 @@ function akkInit(){
   /* ---------- video (loads YouTube only on click) ---------- */
   (function(){
     var y = $('#yt'), b = $('.poster', y);
-    b.onclick = function(){
+    // embed only where iframes are allowed (GitHub Pages, local preview); elsewhere the link opens YouTube
+    if(!/github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname)) return;
+    b.onclick = function(e){
+      e.preventDefault();
       var f = document.createElement('iframe');
       f.src = 'https://www.youtube-nocookie.com/embed/' + y.dataset.id + '?autoplay=1&rel=0';
       f.title = 'Akkusativ Präpositionen: für, gegen, ohne, bis, durch, um';
